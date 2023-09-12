@@ -1,0 +1,21 @@
+[{
+    "label": "Lower Class",
+    "name": "lower_class",
+    "value": 0,
+    "guessedValue": 0
+}, {
+    "label": "Lower-middle Class",
+    "name": "lower_middle_class",
+    "value": 5,
+    "guessedValue": 0
+}, {
+    "label": "Upper-middle Class",
+    "name": "upper_middle_class",
+    "value": 5,
+    "guessedValue": 0
+}, {
+    "label": "Upper Class",
+    "name": "upper_class",
+    "value": 90,
+    "guessedValue": 0
+}]

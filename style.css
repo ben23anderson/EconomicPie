@@ -1,0 +1,147 @@
+#body-card
+{
+	border-radius: 2rem;
+	height: fit-content;
+	padding: 1rem;
+	width: 100%;
+}
+#gameContainer
+{
+	height: 100vh;
+	margin-top: 2rem;
+	padding: 0;
+	position: relative;
+}
+#game-layer
+{
+	height: 100vh;
+	padding-top: .75rem;
+	width: 100%;
+}
+#overlay-card
+{
+	border-radius: 2rem;
+	box-shadow: 1rem;
+	height: fit-content;
+	width: 75%;
+}
+#overlay-layer
+{
+	align-items: center;
+	background-color: #0000004f;
+	display: none;
+	height: 100vh;
+	justify-content: center;
+	position: absolute;
+	width: 100%;
+	z-index: 99999999;
+}
+#pie-image
+{
+	height: 10vh;
+	width: 10vh;
+}
+#score-overlay
+{
+	align-items: center;
+	background-color: #0000004f;
+	display: none;
+	height: 100vh;
+	justify-content: center;
+	position: absolute;
+	width: 100%;
+	z-index: 99999999;
+}
+#slice-zone
+{
+	align-items: center;
+	background-color: #0000004f;
+	display: none;
+	height: 100vh;
+	justify-content: center;
+	position: absolute;
+	width: 100%;
+	z-index: 99999999;
+}
+
+
+
+.block-flex
+{
+	display: flex;
+	padding-bottom: 1rem;
+}
+.btn
+{
+	background-color: #007BFF;
+	border: none;
+	border-radius: 5px;
+	color: #fff;
+	cursor: pointer;
+	font-size: 24px;
+	font-weight: bold;
+	padding: 10px 20px;
+	transition: background-color 0.3s ease-in-out;
+}
+.btn:hover
+{
+	background-color: #0062CC;
+}
+.card-header
+{
+	border-top-left-radius: 2rem !important;
+	border-top-right-radius: 2rem !important;
+}
+.draggable
+{
+	height: 30vh;
+	ms-touch-action: none;
+	position: relative;
+	touch-action: none;
+	width: 30vh;
+}
+.droppable
+{
+	cursor: pointer;
+	height: 20vh;
+	width: 20vw;
+}
+.droppable
+{
+	height: 20vh;
+	width: 20vh;
+}
+.slice-placeholder-div
+{
+	display: flex;
+}
+body
+{
+	align-content: center;
+	background-color: #f7f7f7;
+	display: flex;
+	flex-wrap: wrap;
+	font-size: 18px;
+	height: 100%;
+	overflow-y: scroll;
+}
+h1
+{
+	font-size: 36px;
+	margin-top: 0;
+}
+html,
+body
+{
+	max-width: 100%;
+	overflow-x: hidden;
+}
+img
+{
+	height: inherit;
+	width: inherit;
+}
+p
+{
+	font-size: 18px;
+}
