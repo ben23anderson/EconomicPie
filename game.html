@@ -46,46 +46,39 @@
                 </div>
             </div>
             <!-- Economic Class Plates -->
-            <div class="row py-2 justify-content-center">
-                <div class="col-2 text-center"><p>Poorest 20%</p></div>
-                <div class="col-2 text-center"><p>Lower Middle Class (20%-40%)</p></div>
-                <div class="col-2 text-center"><p>Middle Class (40%-60%)</p></div>
-                <div class="col-2 text-center"><p>Upper Middle Class (60%-80%)</p></div>
-                <div class="col-2 text-center"><p>Richest 20%</p></div>
-            </div>
-            <div class="row py-2 justify-content-center">
-                <div class="col-2 text-center">
-                    
-                    <div class="droppable" eClass=0 onClick="displayEClassOverlay(0)"><img src="images/Plate.png"></div>
+
+            <div class="all-plates">
+                <div class="plates">
+                    <p class="plate-title">Poorest 20%</p>
+                    <div class="droppable" eClass=0 onClick="displayEClassOverlay(0)"><img id="plate-image" src="images/Plate.png"></div>
                     <p id="eClass-label-0">0</p>
                 </div>
-                <div class="col-2 text-center">
-                    
-                    <div class="droppable" eClass=1 onClick="displayEClassOverlay(1)"><img src="images/Plate.png"></div>
+                <div class="plates">
+                    <p class="plate-title">Lower Middle Class (20%-40%)</p>
+                    <div class="droppable" eClass=1 onClick="displayEClassOverlay(1)"><img id="plate-image" src="images/Plate.png"></div>
                     <p id="eClass-label-1">0</p>
                 </div>
-                <div class="col-2 text-center">
-                    
-                    <div class="droppable" eClass=2 onClick="displayEClassOverlay(2)"><img src="images/Plate.png"></div>
+                <div class="plates">
+                    <p class="plate-title">Middle Class (40%-60%)</p>
+                    <div class="droppable" eClass=2 onClick="displayEClassOverlay(2)"><img id="plate-image" src="images/Plate.png"></div>
                     <p id="eClass-label-2">0</p>
                 </div>
-                <div class="col-2 text-center">
-                    
-                    <div class="droppable" eClass=3 onClick="displayEClassOverlay(3)"><img src="images/Plate.png"></div>
+                <div class="plates">
+                    <p class="plate-title">Upper Middle Class (60%-80%)</p>
+                    <div class="droppable" eClass=3 onClick="displayEClassOverlay(3)"><img id="plate-image" src="images/Plate.png"></div>
                     <p id="eClass-label-3">0</p>
                 </div>
-                <div class="col-2 text-center">
-                    
-                    <div class="droppable" eClass=4 onClick="displayEClassOverlay(4)"><img src="images/Plate.png"></div>
+                <div class="plates">
+                    <p class="plate-title">Richest 20%</p>
+                    <div class="droppable" eClass=4 onClick="displayEClassOverlay(4)"><img id="plate-image" src="images/Plate.png"></div>
                     <p id="eClass-label-4">0</p>
                 </div>
-            </div>
+            </div>    
             <div class="row justify-content-center">
                 <div class="col-6 text-center">
                     <button type="button" class="btn btn-primary" onClick="checkGuess()">Submit Guess</button>
                 </div>
             </div>
-        </div>
         </div>
     </div>
     <script src="main.js"></script>

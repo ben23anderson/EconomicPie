@@ -94,22 +94,16 @@
 }
 .draggable
 {
-	height: 30vh;
+	height: clamp(10vh, 17vh, 25vh);
 	ms-touch-action: none;
 	position: relative;
 	touch-action: none;
-	width: 30vh;
+	width: clamp(10vh, 17vh, 25vh);
 }
+
 .droppable
 {
 	cursor: pointer;
-	height: 20vh;
-	width: 20vw;
-}
-.droppable
-{
-	height: 20vh;
-	width: 20vh;
 }
 .slice-placeholder-div
 {
@@ -145,3 +139,28 @@ p
 {
 	font-size: 18px;
 }
+
+.all-plates {
+	display: grid;
+	grid-template-columns: repeat(6, 20%);
+	margin-top: 20px;
+}
+
+.plates {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+.plate-title {
+	text-align: center;
+}
+
+#plate-image {
+	max-width: 100%;
+    height: auto;
+	width: 100%;
+}
+
