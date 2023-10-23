@@ -34,57 +34,57 @@ availablePieces = [
     {
         "id": 1,
         "value": 5,
-        "img": "images/slices/slice-1.png"
+        "img": "./images/slices/slice-1.png"
     },
     {
         "id": 2,
         "value": 5,
-        "img": "images/slices/slice-2.png"
+        "img": "./images/slices/slice-2.png"
     },
     {
         "id": 3,
         "value": 10,
-        "img": "images/slices/slice-3.png"
+        "img": "./images/slices/slice-3.png"
     },
     {
         "id": 4,
         "value": 10,
-        "img": "images/slices/slice-4.png"
+        "img": "./images/slices/slice-4.png"
     },
     {
         "id": 5,
         "value": 10,
-        "img": "images/slices/slice-5.png"
+        "img": "./images/slices/slice-5.png"
     },
     {
         "id": 6,
         "value": 10,
-        "img": "images/slices/slice-6.png"
+        "img": "./images/slices/slice-6.png"
     },
     {
         "id": 7,
         "value": 10,
-        "img": "images/slices/slice-7.png"
+        "img": "./images/slices/slice-7.png"
     },
     {
         "id": 8,
         "value": 10,
-        "img": "images/slices/slice-8.png"
+        "img": "./images/slices/slice-8.png"
     },
     {
         "id": 9,
         "value": 10,
-        "img": "images/slices/slice-9.png"
+        "img": "./images/slices/slice-9.png"
     },
     {
         "id": 10,
         "value": 10,
-        "img": "images/slices/slice-10.png"
+        "img": "./images/slices/slice-10.png"
     },
     {
         "id": 11,
         "value": 10,
-        "img": "images/slices/slice-11.png"
+        "img": "./images/slices/slice-11.png"
     }
 ];
 
@@ -203,7 +203,7 @@ function displayScoreOverlay(correct, score = 100) {
                     <button type="button" class="btn btn-primary" onClick="closeOverlay('` + layerName + `')">Try Again</button>
                 </div>
                 <div class="col-3 text-center">
-                    <button type="button" class="btn btn-primary">Show Answer</button>
+                    <button type="button" class="btn btn-primary" onClick="showAnswer()">Show Answer</button>
                 </div>
             </div>
         </div>
@@ -300,7 +300,7 @@ function updateSlice() {
         sliceValueDOMElement.innerHTML="$"+ availablePieces[0].value + " trillion";
         
         if (sumOfGuesses != 100) {
-            pieDOMElement.setAttribute('src', 'images/Pies/pie-' + (100-sumOfGuesses) + '.png');
+            pieDOMElement.setAttribute('src', './images/Pies/pie-' + (100-sumOfGuesses) + '.png');
         }
         console.log('show');
         pieDOMElement.style.visibility = 'visible';
@@ -397,4 +397,9 @@ function dragMoveListener(event) {
 
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
+}
+
+function showAnswer() {
+
+    //todo
 }

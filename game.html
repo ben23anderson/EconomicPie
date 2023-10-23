@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="./pie-icon.png">
+    <link rel="icon" type="image/x-icon" href="./images/pie-icon.png">
     <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
@@ -33,7 +33,7 @@
                     <p>If you want to change a guess, tap a plate</p>
                     <hr>
                     </div>
-                    <div class="col-sm-3 text-center"><img id="pie-image" src="images/Pies/pie-100.png"></div>
+                    <div class="col-sm-3 text-center"><img id="pie-image" src="./images/Pies/pie-100.png"></div>
                     <p id="slice-value">$5 Trillion</p>
                 </div>
             
@@ -41,7 +41,7 @@
                 <div class="col-10 text-center justify-content-center slice-placeholder-div">
                     <!--Slice Icon-->
                     <div class="slice draggable" id="slice-placeholder" slice-id="1" slice-value="1">
-                        <img src="slice 1.png" id="slice-image">
+                        <img src="./images/slices/slice-1.png" id="slice-image">
                     </div>
                 </div>
             </div>
@@ -50,27 +50,27 @@
             <div class="all-plates">
                 <div class="plates">
                     <p class="plate-title">Poorest 20%</p>
-                    <div class="droppable" eClass=0 onClick="displayEClassOverlay(0)"><img id="plate-image" src="images/Plate.png"></div>
+                    <div class="droppable" eClass=0 onClick="displayEClassOverlay(0)"><img id="plate-image" src="./images/Plate.png"></div>
                     <p id="eClass-label-0">0</p>
                 </div>
                 <div class="plates">
                     <p class="plate-title">Lower Middle Class (20%-40%)</p>
-                    <div class="droppable" eClass=1 onClick="displayEClassOverlay(1)"><img id="plate-image" src="images/Plate.png"></div>
+                    <div class="droppable" eClass=1 onClick="displayEClassOverlay(1)"><img id="plate-image" src="./images/Plate.png"></div>
                     <p id="eClass-label-1">0</p>
                 </div>
                 <div class="plates">
                     <p class="plate-title">Middle Class (40%-60%)</p>
-                    <div class="droppable" eClass=2 onClick="displayEClassOverlay(2)"><img id="plate-image" src="images/Plate.png"></div>
+                    <div class="droppable" eClass=2 onClick="displayEClassOverlay(2)"><img id="plate-image" src="./images/Plate.png"></div>
                     <p id="eClass-label-2">0</p>
                 </div>
                 <div class="plates">
                     <p class="plate-title">Upper Middle Class (60%-80%)</p>
-                    <div class="droppable" eClass=3 onClick="displayEClassOverlay(3)"><img id="plate-image" src="images/Plate.png"></div>
+                    <div class="droppable" eClass=3 onClick="displayEClassOverlay(3)"><img id="plate-image" src="./images/Plate.png"></div>
                     <p id="eClass-label-3">0</p>
                 </div>
                 <div class="plates">
                     <p class="plate-title">Richest 20%</p>
-                    <div class="droppable" eClass=4 onClick="displayEClassOverlay(4)"><img id="plate-image" src="images/Plate.png"></div>
+                    <div class="droppable" eClass=4 onClick="displayEClassOverlay(4)"><img id="plate-image" src="./images/Plate.png"></div>
                     <p id="eClass-label-4">0</p>
                 </div>
             </div>    
