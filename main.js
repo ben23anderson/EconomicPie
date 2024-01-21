@@ -316,6 +316,10 @@ function updateSlice() {
         
         for (var i = 0; i < economicClasses.length; i++){
             document.getElementById('eClass-label-' + i).innerHTML = '$' + economicClasses[i].guessedValue + ' trillion';
+            if (economicClasses[i].guessedValue > 0){
+                let curPlate = document.getElementsByClassName('plate' + i + '-value')[0];
+                curPlate.src = './images/Pies/pie-' +economicClasses[i].guessedValue + '.png';
+            }
         }
         
     }else{

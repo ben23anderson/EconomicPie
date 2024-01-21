@@ -40,37 +40,47 @@
             <div class="row justify-content-center">
                 <div class="col-10 text-center justify-content-center slice-placeholder-div">
                     <!--Slice Icon-->
-                    <div class="slice draggable" id="slice-placeholder" slice-id="1" slice-value="1">
-                        <img src="./images/slices/slice-1.png" id="slice-image">
+                    <div class="slice draggable row" id="slice-placeholder" slice-id="1" slice-value="1">
+                        <img class="img-fluid draggable-slice" src="./images/slices/slice-1.png" id="slice-image">
                     </div>
                 </div>
             </div>
             <!-- Economic Class Plates -->
 
-            <div class="all-plates">
-                <div class="plates">
+            <div class="row all-plates">
+                <div class="plates card">
                     <p class="plate-title">Poorest 20%</p>
-                    <div class="droppable" eClass=0 onClick="displayEClassOverlay(0)"><img id="plate-image" src="./images/Plate.png"></div>
+                    <div class="droppable" eClass=0 onClick="displayEClassOverlay(0)"><img class="plate-image img-fluid" src="./images/Plate.png">
+                        <img class="card-img-overlay plate0-value img-fluid" src="">
+                    </div>
                     <p id="eClass-label-0">0</p>
                 </div>
-                <div class="plates">
+                <div class="plates card">
                     <p class="plate-title">Lower Middle Class (20%-40%)</p>
-                    <div class="droppable" eClass=1 onClick="displayEClassOverlay(1)"><img id="plate-image" src="./images/Plate.png"></div>
+                    <div class="droppable" eClass=1 onClick="displayEClassOverlay(1)"><img class="plate-image img-fluid" src="./images/Plate.png">
+                        <img class="card-img-overlay plate1-value img-fluid" src="">
+                    </div>
                     <p id="eClass-label-1">0</p>
                 </div>
-                <div class="plates">
+                <div class="plates card">
                     <p class="plate-title">Middle Class (40%-60%)</p>
-                    <div class="droppable" eClass=2 onClick="displayEClassOverlay(2)"><img id="plate-image" src="./images/Plate.png"></div>
+                    <div class="droppable" eClass=2 onClick="displayEClassOverlay(2)"><img class="plate-image img-fluid" src="./images/Plate.png">
+                        <img class="card-img-overlay plate2-value img-fluid" src="">
+                    </div>
                     <p id="eClass-label-2">0</p>
                 </div>
-                <div class="plates">
+                <div class="plates card">
                     <p class="plate-title">Upper Middle Class (60%-80%)</p>
-                    <div class="droppable" eClass=3 onClick="displayEClassOverlay(3)"><img id="plate-image" src="./images/Plate.png"></div>
+                    <div class="droppable" eClass=3 onClick="displayEClassOverlay(3)"><img class="plate-image img-fluid" src="./images/Plate.png">
+                        <img class="card-img-overlay plate3-value img-fluid" src="">
+                    </div>
                     <p id="eClass-label-3">0</p>
                 </div>
-                <div class="plates">
+                <div class="plates card">
                     <p class="plate-title">Richest 20%</p>
-                    <div class="droppable" eClass=4 onClick="displayEClassOverlay(4)"><img id="plate-image" src="./images/Plate.png"></div>
+                    <div class="droppable" eClass=4 onClick="displayEClassOverlay(4)"><img class="plate-image img-fluid" src="./images/Plate.png">
+                            <img class="card-img-overlay plate4-value img-fluid" src="">
+                    </div>
                     <p id="eClass-label-4">0</p>
                 </div>
             </div>    
