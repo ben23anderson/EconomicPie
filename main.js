@@ -116,7 +116,7 @@ function setLayerContents(layerName, html){
 // Guess check overlay
 function closeOverlay(layerName) {
     var overlayLayer = $(layerName);
-    overlayLayer.toggle();
+    overlayLayer.hide();
     clearLayer(layerName);
     mainLayerPointerEvents(true);
     
@@ -135,14 +135,31 @@ function displayScoreOverlay(correct, score = 100) {
         // Set header of overlay to Congrats!
         cardHeader = 'Congrats!'
 
+        // Prepare the background board: Hide slice and show controls
+        $('#slice-placeholder').hide();
+        if ($('#post-game-controls').length === 0) {
+            $('.slice-placeholder-div').append(`
+                <div id="post-game-controls" class="text-center my-3" style="width: 100%;">
+                    <button class="btn btn-primary mr-2" onclick="resetGame()">Play Again</button>
+                    <a href="index.html" class="btn btn-primary ml-2">Home</a>
+                </div>
+            `);
+        }
+
         // HTML for overlay layer
         var htmlValue = `
     <div id="overlay-card" class="card">
         
         <div class="card-header">
-            <div class="row">
-                <div class="col-12 text-center">
+            <div class="row align-items-center">
+                <div class="col-1"></div>
+                <div class="col-10 text-center">
                     <h2>${cardHeader}</h2>
+                </div>
+                <div class="col-1">
+                    <button type="button" class="close" aria-label="Close" onClick="closeOverlay('${layerName}')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -150,11 +167,9 @@ function displayScoreOverlay(correct, score = 100) {
             <h5 class="card-title text-center">You guessed correctly.</h5>
             <p class="text-center">We would like to encourage you to share this site and learn more about wealth inequality in the United States and around the globe.</p>
             <div class="row justify-content-center">
-                <div class="col-3 text-center">
-                    <button type="button" class="btn btn-primary" onClick="closeOverlay('` + layerName + `')">Share</button>
-                </div>
-                <div class="col-3 text-center">
-                    <button type="button" class="btn btn-primary">Learn More</button>
+                <div class="col-12 text-center">
+                    <button type="button" class="btn btn-primary mr-2" onClick="shareGame('` + layerName + `')">Share</button>
+                    <button type="button" class="btn btn-primary ml-2" onClick="window.open('https://inequality.org/facts/income-inequality/', '_blank')">Learn More</button>
                 </div>
             </div>
         </div>
@@ -199,11 +214,9 @@ function displayScoreOverlay(correct, score = 100) {
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-${barType}" role="progressbar" aria-valuenow="${score}" aria-valuemin="0" aria-valuemax="100" style="width: ${score}%"></div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-3 text-center">
-                    <button type="button" class="btn btn-primary" onClick="closeOverlay('` + layerName + `')">Try Again</button>
-                </div>
-                <div class="col-3 text-center">
-                    <button type="button" class="btn btn-primary">Show Answer</button>
+                <div class="col-12 text-center">
+                    <button type="button" class="btn btn-primary mr-2" onClick="resetGame()">Try Again</button>
+                    <button type="button" class="btn btn-primary ml-2" onClick="showAnswer()">Show Answer</button>
                 </div>
             </div>
         </div>
@@ -224,21 +237,50 @@ function displayScoreOverlay(correct, score = 100) {
 }
 
 function displayEClassOverlay(eClass){
-        var layerName = '#slice-zone';
-        var html = '<div id="overlay-card" class="card"><div class="card-header"><div class="row justify-content-center"><h3>Click or tap on the slice you want to remove</h3>';
-        var arr = economicClasses[eClass]['guessedSlices'];
-        for (var i = 0; i < arr.length; i++){
-            console.log(arr[i]);
-            if (i != 0 && i % 3 == 0){
-                html += '</div><div class="row justify-content-center">';
-            }
-            html += '<div class="col-3 slice-img" onClick="removeSliceFromEClass(' + i + ',' + eClass + ')"><img src="' + arr[i]['img'] + '"></div>';
+    if (economicClasses[eClass]['guessedSlices'].length === 0) {
+        return;
+    }
+    var layerName = '#slice-zone';
+    
+    var html = `
+    <div id="overlay-card" class="card">
+        <div class="card-header">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <h3>Click or tap on the slice you want to remove</h3>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" style="max-height: 60vh; overflow-y: auto;">
+            <div class="row justify-content-center align-items-center">`;
+
+    var arr = economicClasses[eClass]['guessedSlices'];
+    for (var i = 0; i < arr.length; i++){
+        if (i > 0 && i % 4 == 0){
+            html += '</div><div class="row justify-content-center align-items-center mt-2">';
         }
-        html += `<div class="col-6 text-center"><button type="button" class="btn btn-primary" onClick="closeOverlay('#slice-zone')">Close</button></div></div></div></div>`;
-        clearLayer(layerName);
-        setLayerContents(layerName,html);
-        mainLayerPointerEvents(false);
-        showOverlay(layerName);
+        html += `
+            <div class="col-3 text-center">
+                <button type="button" onClick="removeSliceFromEClass(${i},${eClass})" style="cursor: pointer; background: transparent; border: none; padding: 0;">
+                    <img src="${arr[i]['img']}" style="max-height: 100px; width: auto;">
+                </button>
+            </div>`;
+    }
+    
+    html += `
+            </div>
+            <div class="row justify-content-center mt-4">
+                <div class="col-12 text-center">
+                    <button type="button" class="btn btn-secondary" onClick="closeOverlay('#slice-zone')">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>`;
+
+    clearLayer(layerName);
+    setLayerContents(layerName,html);
+    mainLayerPointerEvents(false);
+    showOverlay(layerName);
 }
 
 function checkGuess() {
@@ -300,7 +342,15 @@ function updateSlice() {
         sliceValueDOMElement.innerHTML="$"+ availablePieces[0].value + " trillion";
         
         if (sumOfGuesses != 100) {
-            pieDOMElement.setAttribute('src', 'images/Pies/pie-' + (100-sumOfGuesses) + '.png');
+            var remaining = 100 - sumOfGuesses;
+            var imageValue = remaining;
+            
+            // Handle missing images (e.g. 85, 75, 5) by rounding to nearest 10
+            // We only have images for multiples of 10, plus 95.
+            if (remaining !== 95 && remaining % 10 !== 0) {
+                imageValue = Math.round(remaining / 10) * 10;
+            }
+            pieDOMElement.setAttribute('src', 'images/Pies/pie-' + imageValue + '.png');
         }
         console.log('show');
         pieDOMElement.style.visibility = 'visible';
@@ -316,6 +366,24 @@ function updateSlice() {
         
         for (var i = 0; i < economicClasses.length; i++){
             document.getElementById('eClass-label-' + i).innerHTML = '$' + economicClasses[i].guessedValue + ' trillion';
+            
+            // Update plate image to show the total wealth as a pie chart
+            var val = economicClasses[i].guessedValue;
+            var $droppable = $('.droppable[eClass="' + i + '"]');
+            var $img = $droppable.find('img');
+            
+            if (val > 0) {
+                $droppable.addClass('has-slices');
+                var imageValue = val;
+                if (val !== 95 && val % 10 !== 0) {
+                    imageValue = Math.round(val / 10) * 10;
+                    if (imageValue === 0) imageValue = 10;
+                }
+                $img.attr('src', 'images/Pies/pie-' + imageValue + '.png').css('opacity', 1);
+            } else {
+                $droppable.removeClass('has-slices');
+                $img.css('opacity', 0);
+            }
         }
         
     }else{
@@ -339,7 +407,8 @@ function removeSliceFromEClass(sliceInex, eClass){
 interact('.droppable').dropzone({
     // only accept elements matching this CSS selector
     accept: '.slice',
-    // Require a 75% element overlap for a drop to be possible
+    // Require pointer overlap for a drop to be possible
+    overlap: 'pointer',
 
 
     // When slice is droped on square
@@ -379,9 +448,12 @@ interact('.draggable')
             //
             // call this function on every dragend event
             end(event) {
-                var x = Number(event.target.x) + Number(event.target.getAttribute('data-x'));
-                var y = Number(event.target.y) + Number(event.target.getAttribute('data-y'));
-
+                if (!event.relatedTarget) {
+                    var target = event.target;
+                    target.style.transform = 'translate(0px, 0px)';
+                    target.setAttribute('data-x', 0);
+                    target.setAttribute('data-y', 0);
+                }
             }
         }
     })
@@ -397,4 +469,148 @@ function dragMoveListener(event) {
 
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
+}
+
+function showAnswer() {
+    closeOverlay('#score-overlay');
+    
+    // Hide game controls
+    $('#slice-placeholder').hide();
+    $('#pie-image').css('visibility', 'hidden');
+    $('#slice-value').css('visibility', 'hidden');
+    $('#remaining-container').html('Actual Wealth Distribution');
+
+    for (var i = 0; i < economicClasses.length; i++) {
+        // Update label with actual value
+        $('#eClass-label-' + i).html('$' + economicClasses[i].value + ' trillion');
+        
+        // Update plate images to show actual wealth as a pie chart
+        var val = economicClasses[i].value;
+        var $img = $('.droppable[eClass="' + i + '"] img');
+        
+        if (val > 0) {
+            var imageValue = val;
+            if (val !== 95 && val % 10 !== 0) {
+                imageValue = Math.round(val / 10) * 10;
+                if (imageValue === 0) imageValue = 10;
+            }
+            $img.attr('src', 'images/Pies/pie-' + imageValue + '.png').css('opacity', 1);
+        } else {
+            $img.css('opacity', 0);
+        }
+    }
+    
+    // Disable interactions
+    $('.droppable').css('pointer-events', 'none');
+
+    // Add controls to return home or restart
+    if ($('#post-game-controls').length === 0) {
+        $('.slice-placeholder-div').append(`
+            <div id="post-game-controls" class="text-center my-3" style="width: 100%;">
+                <button class="btn btn-primary mr-2" onclick="resetGame()">Play Again</button>
+                <a href="index.html" class="btn btn-primary ml-2">Home</a>
+            </div>
+        `);
+    }
+}
+
+function resetGame() {
+    // 1. Reset Economic Classes Data
+    economicClasses.forEach(function(ec) {
+        ec.guessedValue = 0;
+        ec.guessedSlices = [];
+    });
+
+    // 2. Reset Available Pieces (Restore the original array)
+    availablePieces = [
+        {
+            "id": 1,
+            "value": 5,
+            "img": "images/slices/slice-1.png"
+        },
+        {
+            "id": 2,
+            "value": 5,
+            "img": "images/slices/slice-2.png"
+        },
+        {
+            "id": 3,
+            "value": 10,
+            "img": "images/slices/slice-3.png"
+        },
+        {
+            "id": 4,
+            "value": 10,
+            "img": "images/slices/slice-4.png"
+        },
+        {
+            "id": 5,
+            "value": 10,
+            "img": "images/slices/slice-5.png"
+        },
+        {
+            "id": 6,
+            "value": 10,
+            "img": "images/slices/slice-6.png"
+        },
+        {
+            "id": 7,
+            "value": 10,
+            "img": "images/slices/slice-7.png"
+        },
+        {
+            "id": 8,
+            "value": 10,
+            "img": "images/slices/slice-8.png"
+        },
+        {
+            "id": 9,
+            "value": 10,
+            "img": "images/slices/slice-9.png"
+        },
+        {
+            "id": 10,
+            "value": 10,
+            "img": "images/slices/slice-10.png"
+        },
+        {
+            "id": 11,
+            "value": 10,
+            "img": "images/slices/slice-11.png"
+        }
+    ];
+
+    // Remove post game controls if they exist
+    $('#post-game-controls').remove();
+
+    // Restore the remaining text container
+    $('#remaining-container').html('$<span id="remaining">100</span> Trillion Remaining');
+
+    // 3. Re-enable interactions and update UI
+    $('.droppable').css('pointer-events', 'auto');
+    $('#slice-placeholder').show();
+    closeOverlay('#score-overlay');
+    updateSlice();
+}
+
+function shareGame(layerName) {
+    var shareData = {
+        title: 'Economic Pie',
+        text: 'I just played the Economic Pie game! Can you guess the wealth distribution in the US?',
+        url: window.location.href
+    };
+
+    if (navigator.share) {
+        navigator.share(shareData).catch((error) => console.log('Error sharing', error));
+    } else {
+        // Fallback: Copy URL to clipboard
+        var dummy = document.createElement('input');
+        document.body.appendChild(dummy);
+        dummy.value = window.location.href;
+        dummy.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummy);
+        alert('Link copied to clipboard!');
+    }
+    // Overlay remains open so user can choose to Learn More or Close
 }
