@@ -6,11 +6,11 @@
     <title>Economic Pie</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=1.01">
+    <link rel="icon" href="images/Pies/pie-100.png" type="image/png" />
     <link rel="icon" type="image/x-icon" href="./pie-icon.png">
     <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
 
 <body>
@@ -22,73 +22,133 @@
             
             <div id="body-card" class="card">
                 <div class="row justify-content-center">
-                    <div class="col-sm-3">
-                        
-                    </div>
-                    <div class="col-sm-6 text-center">
+                    <div class="col-12 text-center">
                         <h1>Economic Pie</h1>
-                        <p class="text-muted">$<span id="remaining">100</span> Trillion Remaining</p>
+                        <p class="text-muted" id="remaining-container">$<span id="remaining">100</span> Trillion Remaining</p>
                     <hr>
                     <p>Drag the slice of pie to the economic class you think it belongs to.</p>
                     <p>If you want to change a guess, tap a plate</p>
                     <hr>
                     </div>
-                    <div class="col-sm-3 text-center"><img id="pie-image" src="images/Pies/pie-100.png"></div>
-                    <p id="slice-value">$5 Trillion</p>
+                    <div class="col-12 text-center"><img id="pie-image" src="images/Pies/pie-100.png" alt="full pie"></div>
+                    <div class="col-12 text-center"><p id="slice-value">$5 Trillion</p></div>
                 </div>
             
             <div class="row justify-content-center">
                 <div class="col-10 text-center justify-content-center slice-placeholder-div">
                     <!--Slice Icon-->
                     <div class="slice draggable" id="slice-placeholder" slice-id="1" slice-value="1">
-                        <img src="slice 1.png" id="slice-image">
+                        <img src="images/slices/slice-1.png" id="slice-image" alt="$5 Trillion pie slice">
                     </div>
                 </div>
             </div>
             <!-- Economic Class Plates -->
-            <div class="row py-2 justify-content-center">
-                <div class="col-2 text-center"><p>Poorest 20%</p></div>
-                <div class="col-2 text-center"><p>Lower Middle Class (20%-40%)</p></div>
-                <div class="col-2 text-center"><p>Middle Class (40%-60%)</p></div>
-                <div class="col-2 text-center"><p>Upper Middle Class (60%-80%)</p></div>
-                <div class="col-2 text-center"><p>Richest 20%</p></div>
-            </div>
-            <div class="row py-2 justify-content-center">
-                <div class="col-2 text-center">
-                    
-                    <div class="droppable" eClass=0 onClick="displayEClassOverlay(0)"><img src="images/Plate.png"></div>
-                    <p id="eClass-label-0">0</p>
-                </div>
-                <div class="col-2 text-center">
-                    
-                    <div class="droppable" eClass=1 onClick="displayEClassOverlay(1)"><img src="images/Plate.png"></div>
-                    <p id="eClass-label-1">0</p>
-                </div>
-                <div class="col-2 text-center">
-                    
-                    <div class="droppable" eClass=2 onClick="displayEClassOverlay(2)"><img src="images/Plate.png"></div>
-                    <p id="eClass-label-2">0</p>
-                </div>
-                <div class="col-2 text-center">
-                    
-                    <div class="droppable" eClass=3 onClick="displayEClassOverlay(3)"><img src="images/Plate.png"></div>
-                    <p id="eClass-label-3">0</p>
-                </div>
-                <div class="col-2 text-center">
-                    
-                    <div class="droppable" eClass=4 onClick="displayEClassOverlay(4)"><img src="images/Plate.png"></div>
-                    <p id="eClass-label-4">0</p>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-6 text-center">
-                    <button type="button" class="btn btn-primary" onClick="checkGuess()">Submit Guess</button>
-                </div>
+            <div id="plate-container" class="row py-2 justify-content-center">
+                <!-- Generated via JS -->
             </div>
         </div>
         </div>
     </div>
-    <script src="main.js"></script>
+    <script src="data.js?v=1.0"></script>
+    <script src="main.js?v=1.1"></script>
 </body>
+
+<!-- Templates -->
+<template id="template-score-win">
+    <div class="card overlay-card">
+        <div class="card-header">
+            <div class="row align-items-center">
+                <div class="col-1"></div>
+                <div class="col-10 text-center">
+                    <h2>Congrats!</h2>
+                </div>
+                <div class="col-1">
+                    <button type="button" class="close close-overlay-btn" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title text-center">You guessed correctly.</h5>
+            <p class="text-center">We would like to encourage you to share this site and learn more about wealth inequality in the United States and around the globe.</p>
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <button type="button" class="btn btn-primary mr-2 share-btn">Share</button>
+                    <button type="button" class="btn btn-primary ml-2 learn-more-btn">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="template-score-loss">
+    <div class="card overlay-card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="score-header">Game Over</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title text-center score-text">Score</h5>
+            <div class="progress my-3">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <button type="button" class="btn btn-primary mr-2 try-again-btn">Try Again</button>
+                    <button type="button" class="btn btn-primary ml-2 show-answer-btn">Show Answer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="template-slice-removal">
+    <div class="card overlay-card">
+        <div class="card-header">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <h3>Click or tap on the slice you want to remove</h3>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" style="max-height: 60vh; overflow-y: auto;">
+            <div class="row justify-content-center align-items-center slice-grid">
+                <!-- Slices will be injected here -->
+            </div>
+            <div class="row justify-content-center mt-4">
+                <div class="col-12 text-center">
+                    <button type="button" class="btn btn-secondary close-overlay-btn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="template-slice-item">
+    <div class="col-3 text-center mb-2">
+        <button type="button" class="remove-slice-btn" style="cursor: pointer; background: transparent; border: none; padding: 0;">
+            <img class="slice-img" style="max-height: 100px; width: auto;" alt="Pie Slice">
+        </button>
+    </div>
+</template>
+
+<template id="template-post-game-controls">
+    <div id="post-game-controls" class="text-center my-3" style="width: 100%;">
+        <button class="btn btn-primary mr-2 play-again-btn">Play Again</button>
+        <a href="index.html" class="btn btn-primary ml-2">Home</a>
+    </div>
+</template>
+
+<template id="template-plate-item">
+    <div class="col text-center px-1 d-flex flex-column">
+        <p class="small-text label-text"></p>
+        <button type="button" class="droppable"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="plate" style="opacity: 0;"></button>
+        <p class="value-text">0</p>
+    </div>
+</template>
 
 </html>

@@ -1,0 +1,22 @@
+name: Automated Testing
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # Placeholder: In the future, this is where Cypress or Jest would run
+      # - name: Run Cypress Tests
+      #   uses: cypress-io/github-action@v5
+      #   with:
+      #     start: npm start
+
+      - name: Manual Test Plan Check
+        run: echo "Automated tests are not yet configured. Please refer to the Manual Test Plan in README.md."
